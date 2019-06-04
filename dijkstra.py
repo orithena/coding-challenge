@@ -146,10 +146,12 @@ if __name__ == "__main__":
         _, jsonfile, source, target, *_ = sys.argv
         g = Graph(jsonfile)
         cost, path = g.dijkstra(source, target)
-        print(f"The path from {source} to {target} costs {cost} Galacticoins. Here's the path and the cumulated cost to each stop:")
+        print(f"Travelling from {source} to {target} costs {cost} Galacticoins. Here's the path and the cumulated cost to each stop:")
         print(" -> ".join(f"{n.label} ({n.cost:#6.4f} GC)" for n in path))
+    except ValueError:
+        print("Not enough arguments. Use: python3 dijkstra.py generatedGraph.json Erde b3-r7-r4nd7")
     except IndexError:
-        print("Source or target is not in the set of known planets")
+        print(f"'{source}' or '{target}' is not in the set of known stops")
     except FileNotFoundError:
         print(f"Cannot open input file '{jsonfile}'")
     except KeyError:
